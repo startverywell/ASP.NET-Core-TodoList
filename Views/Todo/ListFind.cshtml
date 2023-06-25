@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<TodoCRUD.Models.Todo>
+
+<table class="table table-hover">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="align-middle">
+                    @Html.DisplayFor(modeItem => item.Name)
+                </td>
+                <td class="flex-end">
+                    <a asp-action="Delete" asp-route-itemid="@item.Id" class="btn">
+                        <span class="input-group-text border-danger">
+                            <i class="fa-solid fa-trash-can" style="color:red;"></i>
+                        </span>
+                    </a>
+                    <a asp-action="Update" asp-route-itemid="@item.Id" class="btn">
+                        <span class="input-group-text border-success @(item.type==1 ? "bg-success" : "")">
+                            <i class="fa-solid fa-exclamation" style="color:@(item.type==1 ? "white" : "green")"></i>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

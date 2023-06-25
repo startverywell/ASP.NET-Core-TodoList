@@ -1,0 +1,82 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<TodoCRUD.Models.Todo>
+
+@{
+    ViewData["Title"] = "Index";
+    var complete = 0;
+    var non_complete = 0;
+    foreach (var item in Model)
+    {
+        if (item.active.Equals(0))
+        {
+            non_complete += 1;
+        } else
+        {
+            complete += 1;
+        }
+    }
+}
+<div class="col-12">
+    <div class="row">
+        <div class="col-9"><h2>Todo List</h2></div>
+        <div class="col-3 flex-end"><p>@non_complete more to do, @complete done</p></div>
+        
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <form id="filter" asp-action="Index" method="get">
+
+                <div class="input-group mb-3">
+                    <input type="hidden" name="active" id="filter_active">
+                    <input type="text" class="form-control" placeholder="type to search" name="name" id="filter_name">
+                    <div class="btn-group">
+                        <button type="button" class="active-btn btn btn-primary" data-active="2">All</button>
+                        <button type="button" class="active-btn btn" data-active="0">Active</button>
+                        <button type="button" class="active-btn btn" data-active="1">Done</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12" id="list_find">
+            <table class="table table-hover">
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle">
+                                @Html.DisplayFor(modeItem => item.Name)
+                            </td>
+                            <td class="flex-end">
+                                <a asp-action="Delete" asp-route-itemid="@item.Id" class="btn">
+                                    <span class="input-group-text border-danger">
+                                        <i class="fa-solid fa-trash-can" style="color:red;"></i>
+                                    </span>
+                                </a>
+                                <a asp-action="Update" asp-route-itemid="@item.Id" class="btn">
+                                    <span class="input-group-text border-success @(item.type==1 ? "bg-success" : "")">
+                                        <i class="fa-solid fa-exclamation" style="color:@(item.type==1 ? "white" : "green")"></i>
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <form asp-action="Create">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="What needs to done" name="Name">
+                    <button class="btn btn-primary" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
