@@ -25,3 +25,7 @@ body {
     display:flex;
     justify-content:flex-end;
 }
+
+td.align-middle:hover {
+    color: #0d6efd;
+}
