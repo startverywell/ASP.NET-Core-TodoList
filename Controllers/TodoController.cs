@@ -51,9 +51,9 @@ namespace TodoCRUD.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? itemid)
         {
-            var todo = await _context.Todos.FindAsync(id);
+            var todo = await _context.Todos.FindAsync(itemid);
             if (todo != null) {
                 _context.Remove(todo);
                 await _context.SaveChangesAsync();
