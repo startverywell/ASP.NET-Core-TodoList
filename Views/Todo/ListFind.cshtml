@@ -22,6 +22,11 @@
                             <i class="fa-solid fa-exclamation" style="color:@(item.type==1 ? "white" : "green")"></i>
                         </span>
                     </a>
+                    <a asp-action="Done" asp-route-itemid="@item.Id" class="btn">
+                        <span class="input-group-text border-info @(item.active==1 ? "bg-info" : "")">
+                            <i class="fa-solid fa-check" style="color:@(item.active==1 ? "white" : "green")"></i>
+                        </span>
+                    </a>
                 </td>
             </tr>
         }

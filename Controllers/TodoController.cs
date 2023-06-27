@@ -74,5 +74,18 @@ namespace TodoCRUD.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Done(int? itemid)
+        {
+            var todo = await _context.Todos.FindAsync(itemid);
+            if (todo != null)
+            {
+                todo.active = 1;
+                _context.Update(todo);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
